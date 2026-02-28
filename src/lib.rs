@@ -1,3 +1,10 @@
+// File: lib.rs - This file is part of AURIA
+// Copyright (c) 2026 AURIA Developers and Contributors
+// Description:
+//     Configuration management for AURIA Runtime Core.
+//     Handles loading, validation, and management of runtime configuration
+//     from TOML files and environment variables.
+//
 use auria_core::{AuriaError, AuriaResult};
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
