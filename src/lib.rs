@@ -9,6 +9,8 @@ use auria_core::{AuriaError, AuriaResult};
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 
+pub mod hardware;
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Config {
     pub node: NodeConfig,

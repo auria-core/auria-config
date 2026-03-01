@@ -15,3 +15,4 @@ thiserror = "1.0"
 anyhow = "1.0"
 toml = "0.8"
 uuid = { version = "1.7", features = ["v4", "serde"] }
+num_cpus = "1.16"
