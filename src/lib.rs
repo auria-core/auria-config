@@ -18,6 +18,8 @@ pub struct Config {
     pub network: NetworkConfig,
     pub execution: ExecutionConfig,
     pub settlement: SettlementConfig,
+    pub cluster: ClusterConfig,
+    pub model: ModelConfig,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -41,6 +43,7 @@ pub struct NetworkConfig {
     pub grpc_port: u16,
     pub p2p_enabled: bool,
     pub p2p_port: u16,
+    pub bootstrap_nodes: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -54,6 +57,27 @@ pub struct ExecutionConfig {
 pub struct SettlementConfig {
     pub settlement_enabled: bool,
     pub settlement_interval_seconds: u64,
+    pub rpc_url: Option<String>,
+    pub contract_address: Option<String>,
+    pub wallet_mnemonic: Option<String>,
+    pub chain_id: u64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ClusterConfig {
+    pub cluster_enabled: bool,
+    pub cluster_id: Option<String>,
+    pub peers: Vec<String>,
+    pub heartbeat_interval_ms: u64,
+    pub election_timeout_ms: u64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ModelConfig {
+    pub model_path: Option<String>,
+    pub auto_load: bool,
+    pub max_tokens: u32,
+    pub default_temperature: f32,
 }
 
 impl Default for Config {
@@ -74,16 +98,39 @@ impl Default for Config {
                 http_port: 8080,
                 grpc_port: 50051,
                 p2p_enabled: false,
-                p2p_port: 30303,
+                p2p_port: 9000,
+                bootstrap_nodes: vec![],
             },
             execution: ExecutionConfig {
-                enabled_tiers: vec!["nano".to_string()],
+                enabled_tiers: vec![
+                    "nano".to_string(),
+                    "standard".to_string(),
+                    "pro".to_string(),
+                    "max".to_string(),
+                ],
                 gpu_enabled: true,
                 max_batch_size: 8,
             },
             settlement: SettlementConfig {
-                settlement_enabled: true,
+                settlement_enabled: false,
                 settlement_interval_seconds: 3600,
+                rpc_url: None,
+                contract_address: None,
+                wallet_mnemonic: None,
+                chain_id: 1,
+            },
+            cluster: ClusterConfig {
+                cluster_enabled: false,
+                cluster_id: None,
+                peers: vec![],
+                heartbeat_interval_ms: 1000,
+                election_timeout_ms: 5000,
+            },
+            model: ModelConfig {
+                model_path: None,
+                auto_load: false,
+                max_tokens: 2048,
+                default_temperature: 0.7,
             },
         }
     }

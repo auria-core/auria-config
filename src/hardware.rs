@@ -194,7 +194,7 @@ mod tests {
             gpu: Some(GpuProfile {
                 name: "Test GPU".to_string(),
                 vendor: "NVIDIA".to_string(),
-                vram_bytes: 8 * 1024 * 1024 * 1024,
+                vram_bytes: 24 * 1024 * 1024 * 1024,
                 compute_units: 4096,
                 driver_version: "1.0".to_string(),
                 cuda_available: true,
